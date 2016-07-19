@@ -32,3 +32,62 @@ span {
 .save-button:hover {
   background: #045E55;
 }
+
+p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+}
+
+/*body {
+  display: flex;
+  width: 100vw;
+  align-items: center;
+  flex-direction: column;
+}*/
+
+.layout-section-user-output{
+  background: grey;
+  display: relative;
+  border-bottom: 2px
+}
+.search-input{
+  display: block;
+  width: 500px;
+}
+
+/* Ideas */
+.user-idea {
+  width: 500px;
+  position: relative;
+}
+
+.idea-button {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.user-idea-title {
+  display: inline-block;
+  margin: 10px;
+}
+
+.delete {
+  display: inline-block;
+  float: right;
+  margin: 10px;
+}
+
+.user-idea-body {
+  display: block;
+  margin: 10px;
+}
+
+.upvote, .downvote {
+  margin: 10px;
+}
+
+.ranking {
+  display: inline-block;
+  margin-bottom: 10px;
+}
