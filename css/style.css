@@ -1,3 +1,38 @@
+.form-container {
+  background: #E5F3F2;
+}
+
+form {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
+
+h1 {
+  color: #6D6E71;
+  text-align: center;
+  font-size: 100px;
+}
+
+span {
+  color: #00A79D;
+}
+
+.input-field-size {
+  width: 500px;
+  font-size: 30px;
+  margin: 15px;
+}
+
+.save-button {
+  background: #00A79D;
+  color: #FFFFFF;
+}
+
+.save-button:hover {
+  background: #045E55;
+}
+
 p {
   font-family: 'Open Sans', sans-serif;
   font-size: 1em;
@@ -26,28 +61,32 @@ p {
   position: relative;
 }
 
-/* Imgs */
-.idea-button{
+.idea-button {
   width: 20px;
   height: 20px;
   display: inline-block;
 }
+
 .user-idea-title {
   display: inline-block;
   margin: 10px;
 }
+
 .delete {
   display: inline-block;
   float: right;
   margin: 10px;
 }
+
 .user-idea-body {
   display: block;
   margin: 10px;
 }
+
 .upvote, .downvote {
   margin: 10px;
 }
+
 .ranking {
   display: inline-block;
   margin-bottom: 10px;
