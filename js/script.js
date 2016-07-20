@@ -24,4 +24,4 @@ $('.save-button').on('click', function(event) {
     '<p class="ranking">ranking: swill</p>' +
   '</li>'
   );
-})
+});

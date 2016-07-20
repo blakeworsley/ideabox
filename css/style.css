@@ -1,17 +1,20 @@
-.form-container {
-  background: #E5F3F2;
-}
-
-form {
+header {
   display: flex;
-  height: 100vh;
   justify-content: center;
+  background: #E5F3F2;
+  font-family: 'Roboto', sans-serif;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+form {
+    margin: 50px;
 }
 
 h1 {
   color: #6D6E71;
   text-align: center;
-  font-size: 100px;
+  font-size: 4em;
 }
 
 span {
@@ -33,31 +36,15 @@ span {
   background: #045E55;
 }
 
-p {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1em;
-}
-
-/*body {
+.layout-section-user-output{
   display: flex;
-  width: 100vw;
   align-items: center;
   flex-direction: column;
-}*/
-
-.layout-section-user-output{
-  background: grey;
-  display: relative;
-  border-bottom: 2px
 }
-.search-input{
-  display: block;
-  width: 500px;
-}
-
 /* Ideas */
 .user-idea {
   width: 500px;
+  border-bottom: 2px solid #D1D3D4;
   position: relative;
 }
 
@@ -70,24 +57,34 @@ p {
 .user-idea-title {
   display: inline-block;
   margin: 10px;
+  color: #6D6E71;
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
 .delete {
-  display: inline-block;
   float: right;
   margin: 10px;
+  background-image: url(img/delete.svg);
 }
 
 .user-idea-body {
   display: block;
-  margin: 10px;
+  margin: 10px 10px 30px 10px;
+  color: #939598;
+}
+.upvote {
+  background-image: url(img/upvote.svg);
 }
 
-.upvote, .downvote {
-  margin: 10px;
+.downvote {
+  background-image: url(img/downvote.svg);
 }
 
 .ranking {
+  color: #6D6E71;
+  font-size: 1em;
   display: inline-block;
-  margin-bottom: 10px;
+  margin: 0 5px 10px 5px;
+  postion: absolute;
 }
