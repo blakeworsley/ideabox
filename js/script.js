@@ -36,3 +36,18 @@ $('.save-button').on('click', function(event) {
   localStorage.setItem('ideas', JSON.stringify(allIdeas));
   JSON.parse(localStorage.getItem('ideas'));
 });
+
+$('.user-idea').on('click', '.delete', function(){
+  $(this).parent().remove();
+});
+
+
+
+Idea.prototype.changeTitle = function (newTitle) {
+  this.title = newTitle;
+  return this;
+}
+
+Idea.prototype.deleteItem = function () {
+
+}
