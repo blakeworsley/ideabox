@@ -41,17 +41,17 @@ span {
   align-items: center;
   flex-direction: column;
 }
+/* Search */
+/*TODO: fix the search bar...*/
+input .search-input {
+  height: 500px;
+}
+
 /* Ideas */
 .user-idea {
   width: 500px;
   border-bottom: 2px solid #D1D3D4;
   position: relative;
-}
-
-.idea-button {
-  width: 20px;
-  height: 20px;
-  display: inline-block;
 }
 
 .user-idea-title {
@@ -61,30 +61,52 @@ span {
   font-weight: bold;
   font-size: 1.5em;
 }
-
-.delete {
-  float: right;
-  margin: 10px;
-  background-image: url(img/delete.svg);
-}
-
 .user-idea-body {
   display: block;
   margin: 10px 10px 30px 10px;
   color: #939598;
 }
-.upvote {
-  background-image: url(img/upvote.svg);
-}
 
+.idea-button {
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border: none;
+  border-radius: 50px;
+  display: inline-block;
+}
+.delete {
+  float: right;
+  margin: 10px;
+  background-image: url(../img/delete.svg);
+}
+.delete:hover {
+  background-image: url(../img/delete-hover.svg);
+}
+.idea-footer {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px 10px 0px;
+}
+.upvote {
+  margin: 0px 10px 0px 10px;
+  background-image: url(../img/upvote.svg);
+}
+.upvote:hover {
+  background-image: url(../img/upvote-hover.svg);
+}
 .downvote {
-  background-image: url(img/downvote.svg);
+  margin: 0px 10px 0px 10px;
+  background-image: url(../img/downvote.svg);
+}
+.downvote:hover {
+  background-image: url(../img/downvote-hover.svg);
 }
 
 .ranking {
   color: #6D6E71;
   font-size: 1em;
   display: inline-block;
-  margin: 0 5px 10px 5px;
-  postion: absolute;
+  margin: 0 5px 0px 10px;
+  vertical-align: center;
 }
