@@ -103,7 +103,7 @@ input .search-input {
   background-image: url(../img/downvote-hover.svg);
 }
 
-.ranking {
+.quality {
   color: #6D6E71;
   font-size: 1em;
   display: inline-block;
