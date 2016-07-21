@@ -8,54 +8,48 @@ var qualities = ['swill', 'plausible', 'genius'];
 //push adds to array. push removes from array
 
 
-function Idea (title, body, quality){
+function Idea (title, body){
   this.title = title;
   this.body = body;
-  this.quality = quality;
+  this.quality = qualities[0];
   this.id = Date.now();
 }
+// Idea.prototype.newQuality = function() {
+//   this.arrayNumber = function upvote() {
+//     if (current < 2) {
+//       current++;
+//     }
+//   current =
+//   this.quality = qualities[current];
+//   }
 
 function deleteIdeas() {
-  $('.delete').on('click', function(){
-    $(this).parent().remove();
-  });
-}
-
+    $('.delete').on('click', function(){
+      $(this).parent().remove();
+    });
+  }
 //TODO: Disable Downvote function disableDownvote()
 
-// function currentI() {
-//   if (this.quality === "swill"){
-//     return 0;
-//   }
-//   if (this.quality === "plausible"){
-//     return 1;
-//   }
-//   if (this.quality === "genius"){
-//     return 2;
-//   }
-// }
 
-// var i = currentI()
+// .map
+
 function currentQuality(i) {
-  for ( i; i < qualities.length; i++) {
-    if (i === 2) {
-      return 'genius';
-    }
-    if (i === 1) {
-      i++;
-      return 'genius';
-    }
-    if (i === 0) {
-      i++;
-      return 'plausible';
+  for (var i = 0; i < qualities.length; i++) {
+    if (qualities[i] === 2) {return 'genius'};
+    if (qualities[i] === 1) {return 'genius'};
+    if (qualities[i] === 0) {return 'plausible'};
     }
   }
 }
 
+function upvotedQuality() {
+  var currentQuality = this.quality;
+  console.log(currentQuality);
+}
+
 function upvoteIdeas() {
-  var i = 0
   $('.upvote').on('click', function(){
-    $(this).siblings('.quality').text('quality: ' + currentQuality(i));
+    $(this).siblings('.quality').text('quality: ' + upvotedQuality());
     //select the .quality and change quality to
   });
 }
@@ -68,15 +62,6 @@ Idea.prototype.storeIdea = function () {
 function returnIdeas() {
   return JSON.parse(localStorage.getItem('ideas'));
 }
-//
-// function getIdeasFromStorageAndAppendThem() {
-//   var ideas = returnIdeas();
-//   for (var idea of ideas) {
-//     createOutput(idea.title, idea.body);
-//   }
-//   deleteIdeas()
-// }
-
 
 function getIdeasFromStorageAndAppendThem() {
   var ideas = returnIdeas();
@@ -87,9 +72,6 @@ function getIdeasFromStorageAndAppendThem() {
   deleteIdeas();
   upvoteIdeas();
 }
-// Block.prototype.moveRight = function () {
-//   this.x = this.x + 1;
-//   return this;
 
 function createOutput(title, body) {
   $('.all-ideas').prepend(
