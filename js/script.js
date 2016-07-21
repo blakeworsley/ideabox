@@ -10,18 +10,6 @@ function checkIdeas() {
     localStorage.setItem("ideas", JSON.stringify([]))
   }
 }
-// class Idea {
-//   constructor(title, body, quality) {
-//     this.title = title;
-//     this.body = body;
-//     this.quality = quality;
-//     this.id = Date.now();
-//   }
-//
-//   storeIdea() {
-//     localStorage.setItem('ideas', JSON.stringify(allIdeas));
-//   }
-// }
 
 function Idea (title, body, quality){
   this.title = title;
@@ -38,7 +26,7 @@ Idea.prototype.storeIdea = function (idea) {
 
 const deleteIdeaFromStorage = function(ideaId) {
   let currentIdeas = JSON.parse(localStorage.getItem('ideas'))
-  currentIdeas.forEach((idea, index) => {
+  currentIdeas.forEach(function(idea, index) {
     if (idea.id === ideaId) {
       currentIdeas.splice(index, 1)
       localStorage.setItem('ideas', JSON.stringify(currentIdeas))
@@ -58,10 +46,6 @@ function deleteIdeasFromDom() {
   });
 }
 
-// getAndParseIdeas()
-//if the id of the deleted item matches
-//an id of any idea object then delete the
-//id from local storage.
 
 function getIdeasFromStorageAndAppendThem() {
   let ideas = getAndParseIdeas();
@@ -75,15 +59,6 @@ function getIdeasFromStorageAndAppendThem() {
     deleteIdeasFromDom()
   }
 }
-
-//
-// function getIdeasFromStorageAndAppendThem() {
-//   var ideas = returnIdeas();
-//   for (var idea of ideas) {
-//     createOutput(idea.title, idea.body);
-//   }
-//   deleteIdeas()
-// }
 
 function createOutput(title, body, ideaId) {
   $('.all-ideas').prepend(
