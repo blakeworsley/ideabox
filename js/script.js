@@ -1,7 +1,27 @@
-var userInputTitle = $('.input-title');
-var userInputBody = $('.input-body');
-var searchValue = $('.search-input');
-var allIdeas = [];
+'use strict'
+
+const userInputTitle = $('.input-title');
+const userInputBody = $('.input-body');
+const searchValue = $('.search-input');
+
+function checkIdeas() {
+  let currentIdeas = localStorage.getItem("ideas");
+  if (currentIdeas === null || currentIdeas === undefined) {
+    localStorage.setItem("ideas", JSON.stringify([]))
+  }
+}
+// class Idea {
+//   constructor(title, body, quality) {
+//     this.title = title;
+//     this.body = body;
+//     this.quality = quality;
+//     this.id = Date.now();
+//   }
+//
+//   storeIdea() {
+//     localStorage.setItem('ideas', JSON.stringify(allIdeas));
+//   }
+// }
 
 function Idea (title, body, quality){
   this.title = title;
@@ -10,19 +30,52 @@ function Idea (title, body, quality){
   this.id = Date.now();
 }
 
-function deleteIdeas() {
+Idea.prototype.storeIdea = function (idea) {
+  let newIdeas = JSON.parse(localStorage.getItem("ideas"))
+  newIdeas.push(idea)
+  localStorage.setItem("ideas", JSON.stringify(newIdeas))
+}
+
+const deleteIdeaFromStorage = function(ideaId) {
+  let currentIdeas = JSON.parse(localStorage.getItem('ideas'))
+  currentIdeas.forEach((idea, index) => {
+    if (idea.id === ideaId) {
+      currentIdeas.splice(index, 1)
+      localStorage.setItem('ideas', JSON.stringify(currentIdeas))
+    }
+  })
+}
+
+function getAndParseIdeas() {
+  return JSON.parse(localStorage.getItem('ideas'));
+}
+
+function deleteIdeasFromDom() {
   $('.delete').on('click', function(){
-    $(this).parent().remove();
+    let $idea = $(this).parent()
+    deleteIdeaFromStorage($idea.data("id"))
+    $idea.remove();
   });
 }
 
-Idea.prototype.storeIdea = function () {
-  localStorage.setItem('ideas', JSON.stringify(allIdeas));
+// getAndParseIdeas()
+//if the id of the deleted item matches
+//an id of any idea object then delete the
+//id from local storage.
+
+function getIdeasFromStorageAndAppendThem() {
+  let ideas = getAndParseIdeas();
+  if (typeof ideas[0] !== "object") {
+    console.log("NOTHINGGG");
+  } else {
+    for (let i = 0; i < ideas.length; i++) {
+      let idea = ideas[i]
+      createOutput(idea.title, idea.body, idea.id);
+    }
+    deleteIdeasFromDom()
+  }
 }
 
-function returnIdeas() {
-  return JSON.parse(localStorage.getItem('ideas'));
-}
 //
 // function getIdeasFromStorageAndAppendThem() {
 //   var ideas = returnIdeas();
@@ -32,21 +85,9 @@ function returnIdeas() {
 //   deleteIdeas()
 // }
 
-
-function getIdeasFromStorageAndAppendThem() {
-  var ideas = returnIdeas();
-  for (var i = 0; i < ideas.length; i++) {
-    var idea = ideas[i]
-    createOutput(idea.title, idea.body);
-  }
-}
-// Block.prototype.moveRight = function () {
-//   this.x = this.x + 1;
-//   return this;
-
-function createOutput(title, body) {
+function createOutput(title, body, ideaId) {
   $('.all-ideas').prepend(
-    `<li class="user-idea">
+    `<li class="user-idea" data-id=${ideaId}>
       <h3 class="user-idea-title">${title}</h3>
       <button class="idea-button delete" type="button"></button>
       <p class="user-idea-body">${body}</p>
@@ -61,16 +102,18 @@ function createOutput(title, body) {
 
 $('.save-button').on('click', function(event) {
   event.preventDefault();
-  var title = userInputTitle.val();
-  var body = userInputBody.val();
-  var buildNewIdea = new Idea(title, body);
-  var userIdeas = createOutput(title, body);
-  allIdeas.push(buildNewIdea);
-  buildNewIdea.storeIdea();
-  deleteIdeas()
+  const title = userInputTitle.val();
+  const body = userInputBody.val();
+  const newIdea = new Idea(title, body);
+  createOutput(title, body, newIdea.id);
+  newIdea.storeIdea(newIdea);
+  deleteIdeasFromDom();
 });
 
+checkIdeas();
 getIdeasFromStorageAndAppendThem()
+
+
 // $('.search-input').on('keyup', function() {
 //   var searchedValue = $('.layout-section-user-output').has('.user-idea-title').val(searchValue.val());
 //   // allIdeas.title = searchedValue;
