@@ -1,8 +1,8 @@
 'use strict'
 
-const userInputTitle = $('.input-title');
-const userInputBody = $('.input-body');
-const searchValue = $('.search-input');
+const $userInputTitle = $('.input-title');
+const $userInputBody = $('.input-body');
+const $searchValue = $('.search-input');
 
 function checkIdeas() {
   let currentIdeas = localStorage.getItem("ideas");
@@ -77,16 +77,18 @@ function createOutput(title, body, ideaId) {
 
 $('.save-button').on('click', function(event) {
   event.preventDefault();
-  const title = userInputTitle.val();
-  const body = userInputBody.val();
+  const title = $userInputTitle.val();
+  const body = $userInputBody.val();
   const newIdea = new Idea(title, body);
   createOutput(title, body, newIdea.id);
   newIdea.storeIdea(newIdea);
   deleteIdeasFromDom();
+  $userInputTitle.val('');
+  $userInputBody.val('');
 });
 
 checkIdeas();
-getIdeasFromStorageAndAppendThem()
+getIdeasFromStorageAndAppendThem();
 
 
 // $('.search-input').on('keyup', function() {
