@@ -63,9 +63,9 @@ function getIdeasFromStorageAndAppendThem() {
 function createOutput(idea) {
   $('.all-ideas').prepend(
     `<li class="user-idea" data-id=${idea.id}>
-      <h3 class="user-idea-title">${idea.title}</h3>
+      <h3 class="user-idea-title user-search-content">${idea.title}</h3>
       <button class="idea-button delete" type="button"></button>
-      <p class="user-idea-body">${idea.body}</p>
+      <p class="user-idea-body user-search-content">${idea.body}</p>
       <footer class="idea-footer">
       <button class="idea-button upvote" type="button"></button>
       <button class="idea-button downvote" type="button"></button>
@@ -86,10 +86,10 @@ function upvoteIdea() {
       if (ideas[i].id === $ideaId) {
         ideas[i].quality = incrementQuality(ideas[i]);
         localStorage.setItem('ideas', JSON.stringify(ideas));
-        $('.all-ideas').children().remove();
-        getIdeasFromStorageAndAppendThem();
       }
     };
+    $('.all-ideas').children().remove();
+    getIdeasFromStorageAndAppendThem();
   });
 }
 
@@ -114,10 +114,10 @@ function downvoteIdea() {
       if (ideas[i].id === $ideaId) {
         ideas[i].quality = decrementQuality(ideas[i]);
         localStorage.setItem('ideas', JSON.stringify(ideas));
-        $('.all-ideas').children().remove();
-        getIdeasFromStorageAndAppendThem();
       }
     };
+    $('.all-ideas').children().remove();
+    getIdeasFromStorageAndAppendThem();
   });
 }
 
@@ -145,6 +145,19 @@ $('.save-button').on('click', function(event) {
   deleteIdeasFromDom();
   $userInputTitle.val('');
   $userInputBody.val('');
+});
+
+$('.search-input').on('keyup', function(event){
+ event.preventDefault();
+ var $searchBox = $(this).val().toLowerCase();
+ var ideas = $('.all-ideas').children();
+ ideas.show();
+ var hideIdeas = ideas.filter(function() {
+ var allIdeas = $(this).children('.user-search-content').text();
+ var search = (allIdeas).toLowerCase();
+ return !(search.includes($searchBox));
+})
+hideIdeas.hide();
 });
 
 checkIdeas();
