@@ -1,5 +1,3 @@
-"use strict";
-
 var $userInputTitle = $('.input-title');
 var $userInputBody = $('.input-body');
 var $searchValue = $('.search-input');
@@ -12,14 +10,14 @@ function checkIdeas() {
   }
 }
 
-function Idea (title, body) {
+function Idea(title, body) {
   this.title = title;
   this.body = body;
   this.quality = 'swill';
   this.id = Date.now();
 }
 
-Idea.prototype.storeIdea = function (idea) {
+Idea.prototype.storeIdea = function(idea) {
   var newIdeas = getAndParseIdeas();
   newIdeas.push(idea)
   localStorage.setItem("ideas", JSON.stringify(newIdeas))
@@ -40,7 +38,7 @@ function getAndParseIdeas() {
 }
 
 function deleteIdeasFromDom() {
-  $('.delete').on('click', function(){
+  $('.delete').on('click', function() {
     var $idea = $(this).parent()
     deleteIdeaFromStorage($idea.data("id"))
     $idea.remove();
@@ -51,12 +49,13 @@ function deleteIdeasFromDom() {
 function getIdeasFromStorageAndAppendThem() {
   var ideas = getAndParseIdeas();
   if (typeof ideas[0] !== "object") {
-    console.log("NOTHINGGG");
   } else {
     for (var i = 0; i < ideas.length; i++) {
       createOutput(ideas[i]);
     }
     deleteIdeasFromDom();
+    upvoteIdea();
+    downvoteIdea();
   }
 }
 
@@ -73,13 +72,10 @@ function createOutput(idea) {
       </footer>
      </li>`
   );
-  upvoteIdea();
-  downvoteIdea();
 };
 
 function upvoteIdea() {
   $('.upvote').on('click', function(event) {
-    console.log('click upvote');
     var $ideaId = $(this).parent().parent().data('id');
     var ideas = getAndParseIdeas();
     for (var i = 0; i < ideas.length; i++) {
@@ -107,7 +103,6 @@ function incrementQuality(idea) {
 
 function downvoteIdea() {
   $('.downvote').on('click', function(event) {
-    console.log('click downvote');
     var $ideaId = $(this).parent().parent().data('id');
     var ideas = getAndParseIdeas();
     for (var i = 0; i < ideas.length; i++) {
@@ -147,17 +142,17 @@ $('.save-button').on('click', function(event) {
   $userInputBody.val('');
 });
 
-$('.search-input').on('keyup', function(event){
- event.preventDefault();
- var $searchBox = $(this).val().toLowerCase();
- var ideas = $('.all-ideas').children();
- ideas.show();
- var hideIdeas = ideas.filter(function() {
- var allIdeas = $(this).children('.user-search-content').text();
- var search = (allIdeas).toLowerCase();
- return !(search.includes($searchBox));
-})
-hideIdeas.hide();
+$('.search-input').on('keyup', function(event) {
+  event.preventDefault();
+  var $searchBox = $(this).val().toLowerCase();
+  var ideas = $('.all-ideas').children();
+  ideas.show();
+  var hideIdeas = ideas.filter(function() {
+    var allIdeas = $(this).children('.user-search-content').text();
+    var search = (allIdeas).toLowerCase();
+    return !(search.includes($searchBox));
+  })
+  hideIdeas.hide();
 });
 
 checkIdeas();
