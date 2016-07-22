@@ -53,10 +53,10 @@ function getIdeasFromStorageAndAppendThem() {
     for (var i = 0; i < ideas.length; i++) {
       createOutput(ideas[i]);
     }
-    deleteIdeasFromDom();
-    upvoteIdea();
-    downvoteIdea();
   }
+  deleteIdeasFromDom();
+  downvoteIdea();
+  upvoteIdea();
 }
 
 function createOutput(idea) {
@@ -133,11 +133,9 @@ $('.save-button').on('click', function(event) {
   var title = $userInputTitle.val();
   var body = $userInputBody.val();
   var newIdea = new Idea(title, body);
-  createOutput(newIdea);
   newIdea.storeIdea(newIdea);
-  upvoteIdea();
-  downvoteIdea();
-  deleteIdeasFromDom();
+  $('.all-ideas').children().remove();
+  getIdeasFromStorageAndAppendThem();
   $userInputTitle.val('');
   $userInputBody.val('');
 });

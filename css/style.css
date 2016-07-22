@@ -43,8 +43,8 @@ span {
 }
 /* Search */
 /*TODO: fix the search bar...*/
-input .search-input {
-  height: 500px;
+.search-input {
+  border: 1px solid #D1D3D4;
 }
 
 /* Ideas */
@@ -109,4 +109,9 @@ input .search-input {
   display: inline-block;
   margin: 0 5px 0px 10px;
   vertical-align: center;
+}
+
+
+@media (max-width: 800px;) {
+
 }
