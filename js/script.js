@@ -1,6 +1,6 @@
-var $userInputTitle = $('.input-title');
-var $userInputBody = $('.input-body');
-var $searchValue = $('.search-input');
+var $userInputTitle = $('.input-title-js');
+var $userInputBody = $('.input-body-js');
+var $searchValue = $('.search-input-js');
 var qualities = ['swill', 'plausible', 'genius'];
 
 function checkIdeas() {
@@ -38,7 +38,7 @@ function getAndParseIdeas() {
 }
 
 function deleteIdeasFromDom() {
-  $('.delete').on('click', function() {
+  $('.delete-js').on('click', function() {
     var $idea = $(this).parent()
     deleteIdeaFromStorage($idea.data("id"))
     $idea.remove();
@@ -60,23 +60,23 @@ function getIdeasFromStorageAndAppendThem() {
 }
 
 function createOutput(idea) {
-  $('.all-ideas').prepend(
-    `<li class="user-idea" data-id=${idea.id}>
-    <h3 contenteditable id=${idea.id} class="user-idea-title-${idea.id} user-search-content">${idea.title}</h3>
-    <button class="idea-button delete" type="button"></button>
-    <p contenteditable id=${idea.id} class="user-idea-body-${idea.id} user-search-content">${idea.body}</p>
-    <footer class="idea-footer">
-    <button class="idea-button upvote" type="button"></button>
-    <button class="idea-button downvote" type="button"></button>
-    <p class="quality">quality: ${idea.quality}</p>
+  $('.all-ideas-js').prepend(
+    `<li class="user-idea-js user-idea" data-id=${idea.id}>
+    <h3 contenteditable id=${idea.id} class="user-idea-title-js-${idea.id} user-search-content-js user-idea-title user-search-content">${idea.title}</h3>
+    <button class="idea-button-js delete-js idea-button delete" type="button"></button>
+    <p contenteditable id=${idea.id} class="user-idea-body-js-${idea.id} user-search-content-js user-idea-body user-search-content">${idea.body}</p>
+    <footer class="idea-footer-js idea-footer">
+    <button class="idea-button-js upvote-js idea-button upvote" type="button"></button>
+    <button class="idea-button-js downvote-js idea-button downvote" type="button"></button>
+    <p class="quality-js quality">quality: ${idea.quality}</p>
     </footer>
     </li>`
   );
-  $('.save-button').prop('disabled', true);
+  $('.save-button-js').prop('disabled', true);
 };
 
 function upvoteIdea() {
-  $('.upvote').on('click', function(event) {
+  $('.upvote-js').on('click', function(event) {
     var $ideaId = $(this).parent().parent().data('id');
     var ideas = getAndParseIdeas();
     for (var i = 0; i < ideas.length; i++) {
@@ -85,7 +85,7 @@ function upvoteIdea() {
         localStorage.setItem('ideas', JSON.stringify(ideas));
       }
     };
-    $('.all-ideas').children().remove();
+    $('.all-ideas-js').children().remove();
     getIdeasFromStorageAndAppendThem();
   });
 }
@@ -103,7 +103,7 @@ function incrementQuality(idea) {
 }
 
 function downvoteIdea() {
-  $('.downvote').on('click', function(event) {
+  $('.downvote-js').on('click', function(event) {
     var $ideaId = $(this).parents('li').data('id');
     var ideas = getAndParseIdeas();
     for (var i = 0; i < ideas.length; i++) {
@@ -112,7 +112,7 @@ function downvoteIdea() {
         localStorage.setItem('ideas', JSON.stringify(ideas));
       }
     };
-    $('.all-ideas').children().remove();
+    $('.all-ideas-js').children().remove();
     getIdeasFromStorageAndAppendThem();
   });
 }
@@ -129,59 +129,62 @@ function decrementQuality(idea) {
   };
 }
 
-$('.save-button').on('click', function(event) {
+
+$('.save-button-js').on('click', function(event) {
   event.preventDefault();
   var title = $userInputTitle.val();
   var body = $userInputBody.val();
   var newIdea = new Idea(title, body);
   newIdea.storeIdea(newIdea);
-  $('.all-ideas').children().remove();
+  $('.all-ideas-js').children().remove();
   getIdeasFromStorageAndAppendThem();
   $userInputTitle.val('');
   $userInputBody.val('');
 });
 
-$('.search-input').on('keyup', function(event) {
+$('.search-input-js').on('keyup', function(event) {
   event.preventDefault();
   var $searchBox = $(this).val().toLowerCase();
-  var ideas = $('.all-ideas').children();
+  var ideas = $('.all-ideas-js').children();
   ideas.show();
   var hideIdeas = ideas.filter(function() {
-    var allIdeas = $(this).children('.user-search-content').text();
+    var allIdeas = $(this).children('.user-search-content-js').text();
     var search = (allIdeas).toLowerCase();
     return !(search.includes($searchBox));
   })
   hideIdeas.hide();
 });
 
-$('.input-field-size').on('keyup', function(event) {
+$('.input-field-size-js').on('keyup', function(event) {
   event.preventDefault();
   if ($userInputTitle.val().length > 0 && $userInputBody.val().length > 0) {
-    $('.save-button').prop('disabled', false);
+    $('.save-button-js').prop('disabled', false);
+  } else {
+    $('.save-button-js').prop('disabled', true);
   }
 })
 
-$('.all-ideas').on('click', '.user-search-content', function(event) {
+$('.all-ideas-js').on('click', '.user-search-content-js', function(event) {
   var self = this;
-  $('.user-search-content').prop('contenteditable', true);
-  $('.all-ideas').keypress(function(e) {
+  $('.user-search-content-js').prop('contenteditable', true);
+  $('.all-ideas-js').keypress(function(e) {
     var $ideaId = parseInt(self.id)
     var ideas = getAndParseIdeas();
     for (var i = 0; i < ideas.length; i++) {
       if (ideas[i].id === $ideaId) {
-        ideas[i].title = $(`.user-idea-title-${$ideaId}`).text();
-        ideas[i].body = $(`.user-idea-body-${$ideaId}`).text();
+        ideas[i].title = $(`.user-idea-title-js-${$ideaId}`).text();
+        ideas[i].body = $(`.user-idea-body-js-${$ideaId}`).text();
       }
     };
     localStorage.setItem('ideas', JSON.stringify(ideas))
   })
 })
 
-$('.all-ideas').keypress(function(e) {
+$('.all-ideas-js').keypress(function(e) {
   if (e.which === 13) {
-    $('.user-search-content').prop('contenteditable', false);
+    $('.user-search-content-js').prop('contenteditable', false);
     setTimeout(function() {
-      $('.user-search-content').prop('contenteditable', true);
+      $('.user-search-content-js').prop('contenteditable', true);
     }, 1);
   }
 });
