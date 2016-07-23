@@ -2,7 +2,7 @@ header {
   display: flex;
   justify-content: center;
   background: #E5F3F2;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Slab', sans-serif;
 }
 body {
   font-family: 'Open Sans', sans-serif;
@@ -52,17 +52,22 @@ span {
   width: 500px;
   border-bottom: 2px solid #D1D3D4;
   position: relative;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .user-idea-title {
   display: inline-block;
+  line-height: 1.2em;
   margin: 10px;
   color: #6D6E71;
   font-weight: bold;
   font-size: 1.5em;
+  max-width: 80%;
 }
 .user-idea-body {
   display: block;
+  line-height: 1.2em;
   margin: 10px 10px 30px 10px;
   color: #939598;
 }
@@ -111,7 +116,22 @@ span {
   vertical-align: center;
 }
 
-
-@media (max-width: 800px;) {
+@media (max-width: 600px) {
+  form {
+    width: 100%;
+  }
+  .input-field-size {
+    max-width: 90%;
+    border: border: 4px solid #D1D3D4;
+  }
+  .all-ideas {
+    width: 90%;
+  }
+  .user-idea {
+    max-width: 100%;
+  }
+  .user-idea-title {
+    max-width: 73%;
+  }
 
 }
