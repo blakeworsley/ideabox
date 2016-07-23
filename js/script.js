@@ -39,7 +39,7 @@ function getAndParseIdeas() {
 
 function deleteIdeasFromDom() {
   $('.delete').on('click', function() {
-    var $idea = $(this).parent()
+    var $idea = $(this).parents('li')
     deleteIdeaFromStorage($idea.data("id"))
     $idea.remove();
   });
@@ -62,8 +62,10 @@ function getIdeasFromStorageAndAppendThem() {
 function createOutput(idea) {
   $('.all-ideas').prepend(
     `<li class="user-idea" data-id=${idea.id}>
+      <header class="user-idea-header">
       <h3 class="user-idea-title user-search-content">${idea.title}</h3>
       <button class="idea-button delete" type="button"></button>
+      </header>
       <p class="user-idea-body user-search-content">${idea.body}</p>
       <footer class="idea-footer">
       <button class="idea-button upvote" type="button"></button>
