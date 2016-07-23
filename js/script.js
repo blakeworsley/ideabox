@@ -62,9 +62,9 @@ function getIdeasFromStorageAndAppendThem() {
 function createOutput(idea) {
   $('.all-ideas').prepend(
     `<li class="user-idea" data-id=${idea.id}>
-    <h3 contenteditable class="user-idea-title user-search-content">${idea.title}</h3>
+    <h3 contenteditable id=${idea.id} class="user-idea-title-${idea.id} user-search-content">${idea.title}</h3>
     <button class="idea-button delete" type="button"></button>
-    <p contenteditable class="user-idea-body user-search-content">${idea.body}</p>
+    <p contenteditable id=${idea.id} class="user-idea-body-${idea.id} user-search-content">${idea.body}</p>
     <footer class="idea-footer">
     <button class="idea-button upvote" type="button"></button>
     <button class="idea-button downvote" type="button"></button>
@@ -161,33 +161,29 @@ $('.input-field-size').on('keyup', function(event) {
   }
 })
 
-$('.all-ideas').keypress('.user-search-content', function(e) {
-    var $ideaId = $('.user-search-content').parent().data('id');
+$('.all-ideas').on('click', '.user-search-content', function(event) {
+  var self = this;
+  $('.user-search-content').prop('contenteditable', true);
+  $('.all-ideas').keypress(function(e) {
+    var $ideaId = parseInt(self.id)
     var ideas = getAndParseIdeas();
     for (var i = 0; i < ideas.length; i++) {
       if (ideas[i].id === $ideaId) {
-        ideas[i].title = $('.user-idea-title').text();
-        ideas[i].body = $('.user-idea-body').text();
+        ideas[i].title = $(`.user-idea-title-${$ideaId}`).text();
+        ideas[i].body = $(`.user-idea-body-${$ideaId}`).text();
       }
     };
-    localStorage.setItem('ideas', JSON.stringify(ideas));
-    if(e.which == 13) {
-      localStorage.setItem('ideas', JSON.stringify(ideas))
-      $('.user-search-content').prop('contenteditable', false);
-  }
-});
+    localStorage.setItem('ideas', JSON.stringify(ideas))
+  })
+})
 
-$('.all-ideas').on('click', '.user-search-content', function() {
-  // var $ideaId = $('.user-search-content').parent().data('id');
-  // var ideas = getAndParseIdeas();
-  // for (var i = 0; i < ideas.length; i++) {
-  //   if (ideas[i].id === $ideaId) {
-  //     ideas[i].title = $('.user-idea-title').text();
-  //     ideas[i].body = $('.user-idea-body').text();
-  //   }
-  // };
-  // localStorage.setItem('ideas', JSON.stringify(ideas));
-  $('.user-search-content').prop('contenteditable', true);
+$('.all-ideas').keypress(function(e) {
+  if (e.which === 13) {
+    $('.user-search-content').prop('contenteditable', false);
+    setTimeout(function() {
+      $('.user-search-content').prop('contenteditable', true);
+    }, 1);
+  }
 });
 
 checkIdeas();
