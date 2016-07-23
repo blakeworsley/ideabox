@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto:700" rel="stylesheet">
-    <link rel="stylesheet" href="css/reset.css" media="screen" title="Style Sheet" charset="utf-8">
-    <link rel="stylesheet" href="css/style.css" media="screen" title="Style Sheet" charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <header class="form-container">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto:700" rel="stylesheet">
+  <link rel="stylesheet" href="css/reset.css" media="screen" title="Style Sheet" charset="utf-8">
+  <link rel="stylesheet" href="css/style.css" media="screen" title="Style Sheet" charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+  <header class="form-container">
     <form class="layout-form" action="index.html" method="post">
       <ul>
         <li>
@@ -22,28 +24,18 @@
           <input class="input-field-size input-body" type="text" placeholder="Body">
         </li>
         <li>
-          <button class="input-field-size save-button" type="button">save</button>
+          <button disabled class="input-field-size save-button" type="button">save</button>
         </li>
       </ul>
     </form>
   </header>
-    <section class="layout-section-user-output">
-      <input type=search placeholder="Search" class="input-field-size search-input">
-      <ul class="all-ideas">
-        <!-- <li class="user-idea">
-          <h3 class="user-idea-title">Example Idea 1</h3>
-          <button class="idea-button delete" type="button"></button>
-          <p class="user-idea-body">Body goes in here.</p>
-          <footer class="idea-footer">
-            <button class="idea-button upvote" type="button"></button>
-            <button class="idea-button downvote" type="button"></button>
-            <p class="ranking">quality: swill</p>
-          </footer>
-        </li> -->
-      </ul>
-    </section>
+  <section class="layout-section-user-output">
+    <input type=search placeholder="Search" class="input-field-size search-input">
+    <ul class="all-ideas">
+    </ul>
+  </section>
+  <script src="js/jquery.js"></script>
+  <script src="js/script.js"></script>
+</body>
 
-    <script src="js/jquery.js"></script>
-    <script src="js/script.js"></script>
-  </body>
 </html>
