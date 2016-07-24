@@ -49,13 +49,11 @@ textarea {
   align-items: center;
   flex-direction: column;
 }
-/* Search */
-/*TODO: fix the search bar...*/
+
 .search-input {
   border: 1px solid #D1D3D4;
 }
 
-/* Ideas */
 .user-idea {
   width: 500px;
   border-bottom: 2px solid #D1D3D4;

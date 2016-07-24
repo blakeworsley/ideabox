@@ -3,48 +3,47 @@ var $userInputBody = $('.input-body-js');
 var $searchValue = $('.search-input-js');
 var qualities = ['swill', 'plausible', 'genius'];
 
-function checkIdeas() {
-  var currentIdeas = localStorage.getItem("ideas");
-  if (currentIdeas === null || currentIdeas === undefined) {
-    localStorage.setItem("ideas", JSON.stringify([]))
-  }
-}
-
 function Idea(title, body) {
   this.title = title;
   this.body = body;
   this.quality = 'swill';
   this.id = Date.now();
-}
+};
 
 Idea.prototype.storeIdea = function(idea) {
   var newIdeas = getAndParseIdeas();
-  newIdeas.push(idea)
-  localStorage.setItem("ideas", JSON.stringify(newIdeas))
-}
+  newIdeas.push(idea);
+  localStorage.setItem("ideas", JSON.stringify(newIdeas));
+};
+
+function checkIdeas() {
+  var currentIdeas = localStorage.getItem("ideas");
+  if (currentIdeas === null || currentIdeas === undefined) {
+    localStorage.setItem("ideas", JSON.stringify([]));
+  }
+};
 
 var deleteIdeaFromStorage = function(ideaId) {
   var currentIdeas = getAndParseIdeas();
   currentIdeas.forEach(function(idea, index) {
     if (idea.id === ideaId) {
-      currentIdeas.splice(index, 1)
-      localStorage.setItem('ideas', JSON.stringify(currentIdeas))
+      currentIdeas.splice(index, 1);
+      localStorage.setItem('ideas', JSON.stringify(currentIdeas));
     }
   })
-}
+};
 
 function getAndParseIdeas() {
   return JSON.parse(localStorage.getItem('ideas'));
-}
+};
 
 function deleteIdeasFromDom() {
   $('.delete-js').on('click', function() {
-    var $idea = $(this).parent()
-    deleteIdeaFromStorage($idea.data("id"))
+    var $idea = $(this).parent();
+    deleteIdeaFromStorage($idea.data("id"));
     $idea.remove();
   });
-}
-
+};
 
 function getIdeasFromStorageAndAppendThem() {
   var ideas = getAndParseIdeas();
@@ -129,7 +128,6 @@ function decrementQuality(idea) {
   };
 }
 
-
 $('.save-button-js').on('click', function(event) {
   event.preventDefault();
   var title = $userInputTitle.val();
@@ -164,11 +162,9 @@ $('.input-field-size-js').on('keyup', function(event) {
   }
 })
 
-$('.all-ideas-js').on('click', '.user-search-content-js', function(event) {
-  var self = this;
-  $('.user-search-content-js').prop('contenteditable', true);
-  $('.all-ideas-js').keypress(function(e) {
-    var $ideaId = parseInt(self.id)
+$('.all-ideas-js').on('focusout', '.user-search-content-js', function() {
+    var self = this;
+    var $ideaId = parseInt(self.id);
     var ideas = getAndParseIdeas();
     for (var i = 0; i < ideas.length; i++) {
       if (ideas[i].id === $ideaId) {
@@ -176,16 +172,15 @@ $('.all-ideas-js').on('click', '.user-search-content-js', function(event) {
         ideas[i].body = $(`.user-idea-body-js-${$ideaId}`).text();
       }
     };
-    localStorage.setItem('ideas', JSON.stringify(ideas))
+    localStorage.setItem('ideas', JSON.stringify(ideas));
   })
-})
 
 $('.all-ideas-js').keypress(function(e) {
   if (e.which === 13) {
     $('.user-search-content-js').prop('contenteditable', false);
     setTimeout(function() {
       $('.user-search-content-js').prop('contenteditable', true);
-    }, 1);
+    }, 100);
   }
 });
 
