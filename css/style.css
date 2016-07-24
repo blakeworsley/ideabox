@@ -25,6 +25,8 @@ span {
   width: 500px;
   font-size: 30px;
   margin: 15px;
+  border: 1px solid #6D6E71;
+  font-size: 1.5em;
 }
 textarea {
   width: 500px;
