@@ -23,7 +23,7 @@ function checkIdeas() {
   }
 }
 
-var deleteIdeaFromStorage = function(ideaId) {
+function deleteIdeaFromStorage(ideaId) {
   var currentIdeas = getAndParseIdeas();
   currentIdeas.forEach(function(idea, index) {
     if (idea.id === ideaId) {
@@ -31,7 +31,7 @@ var deleteIdeaFromStorage = function(ideaId) {
       localStorage.setItem('ideas', JSON.stringify(currentIdeas));
     }
   });
-};
+}
 
 function getAndParseIdeas() {
   return JSON.parse(localStorage.getItem('ideas'));
@@ -47,8 +47,7 @@ function deleteIdeasFromDom() {
 
 function getIdeasFromStorageAndAppendThem() {
   var ideas = getAndParseIdeas();
-  if (typeof ideas[0] !== "object") {
-  } else {
+  if (typeof ideas[0] !== "object") {} else {
     for (var i = 0; i < ideas.length; i++) {
       createOutput(ideas[i]);
     }
@@ -163,17 +162,17 @@ $('.input-field-size-js').on('keyup', function(event) {
 });
 
 $('.all-ideas-js').on('focusout', '.user-search-content-js', function() {
-    var self = this;
-    var $ideaId = parseInt(self.id);
-    var ideas = getAndParseIdeas();
-    for (var i = 0; i < ideas.length; i++) {
-      if (ideas[i].id === $ideaId) {
-        ideas[i].title = $(`.user-idea-title-js-${$ideaId}`).text();
-        ideas[i].body = $(`.user-idea-body-js-${$ideaId}`).text();
-      }
+  var self = this;
+  var $ideaId = parseInt(self.id);
+  var ideas = getAndParseIdeas();
+  for (var i = 0; i < ideas.length; i++) {
+    if (ideas[i].id === $ideaId) {
+      ideas[i].title = $(`.user-idea-title-js-${$ideaId}`).text();
+      ideas[i].body = $(`.user-idea-body-js-${$ideaId}`).text();
     }
-    localStorage.setItem('ideas', JSON.stringify(ideas));
-  });
+  }
+  localStorage.setItem('ideas', JSON.stringify(ideas));
+});
 
 $('.all-ideas-js').keypress(function(e) {
   if (e.which === 13) {
